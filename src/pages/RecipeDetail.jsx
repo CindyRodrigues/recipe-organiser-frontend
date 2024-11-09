@@ -19,7 +19,7 @@ const RecipeDetail = () => {
                     <div className="card mb-4">
                         <div className="row g-0">
                             <div className="col-md-4">
-                                <img src={data.imageLink} alt={data.name} className="img-fluid rounded-start" />
+                                <img src={data.imageLink} alt={data.name} className="img-fluid rounded-start" style={{ height: "600px", objectFit: "cover"}} />
                             </div>
                             <div className="col-md-8 px-4">
                                 <div className="card-body">
