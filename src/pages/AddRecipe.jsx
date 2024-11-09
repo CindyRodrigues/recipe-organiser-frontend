@@ -15,7 +15,7 @@ const AddRecipe = () => {
     const handleChange = (event) => {
         const {name, value} = event.target
         setRecipeData((prev) => (
-            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ").map(instruction => instruction + ".") : value)}
+            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ") : value)}
         ))
     }
 
@@ -46,7 +46,7 @@ const AddRecipe = () => {
             <Header />
             <main className="container py-4">
                 <h2>Add Recipe</h2>
-                <form onSubmit={handleAddRecipeForm}>
+                <form onSubmit={handleAddRecipeForm} className="mb-4">
                     <label>
                         Name:<br />
                         <input type="text" name="name" value={recipeData.name} onChange={handleChange} />
@@ -65,7 +65,7 @@ const AddRecipe = () => {
                     </label><br /><br />
                     <label>
                         Instructions:<br />
-                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(" ")} onChange={handleChange}></textarea>
+                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange}></textarea>
                     </label><br /><br />
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
