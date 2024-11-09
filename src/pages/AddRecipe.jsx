@@ -2,6 +2,8 @@ import { useState } from "react"
 import Header from "../components/Header"
 
 const AddRecipe = () => {
+    const [message, setMessage] = useState("")
+
     const [recipeData, setRecipeData] = useState({
         name: "",
         cuisineType: "",
@@ -13,7 +15,7 @@ const AddRecipe = () => {
     const handleChange = (event) => {
         const {name, value} = event.target
         setRecipeData((prev) => (
-            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ") : value)}
+            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ").map(instruction => instruction + ".") : value)}
         ))
     }
 
@@ -30,8 +32,10 @@ const AddRecipe = () => {
             if(!response.ok) {
                 throw "Failed to add recipe."
             }
-            const recipeAdded = response.json()
-            console.log(recipeAdded)
+            const addedRecipe = response.json()
+            if(addedRecipe) {
+                setMessage("Recipe added successfully.")
+            }
         } catch (error) {
             console.log("Error adding recipe:", error)
         }
@@ -61,10 +65,11 @@ const AddRecipe = () => {
                     </label><br /><br />
                     <label>
                         Instructions:<br />
-                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange}></textarea>
+                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(" ")} onChange={handleChange}></textarea>
                     </label><br /><br />
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+                <p>{message}</p>
             </main>
         </div>
     )

@@ -9,15 +9,15 @@ const RecipeCard = ({ recipe }) => {
             if(!response.ok) {
                 throw "Failed to delete recipe."
             }
-            const data = await response.json()
-            if(data) {
+            const deletedRecipe = await response.json()
+            if(deletedRecipe) {
                 window.location.reload()
             }
         } catch (error) {
             console.log("Error deleting recipe:", error)
         }
     }
-    
+
     return (
         <div className="col-md-3 mb-4">
             <div className="card h-100">
