@@ -5,13 +5,13 @@ import RecipeCard from '../components/RecipeCard'
 
 const Recipes = () => {
     const [searchQuery, setSearchQuery] = useState("")
+    const [recipes, setRecipes] = useState([])
 
     const { data, loading, error } = useFetch('https://recipe-organiser-backend.vercel.app/recipes')
 
-    let recipes = []
 
     if (data && data.length > 0) {
-        recipes = searchQuery === "" ? data : data.filter(recipe => recipe.name.toLowerCase().includes(searchQuery.toLowerCase()))
+        setRecipes(searchQuery === "" ? data : data.filter(recipe => recipe.name.toLowerCase().includes(searchQuery.toLowerCase())))
     }
 
     return (
