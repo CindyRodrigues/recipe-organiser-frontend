@@ -11,7 +11,7 @@ const Recipes = () => {
     let recipes = []
 
     if (data && data.length > 0) {
-        recipes = searchQuery === "" ? data : data.filter(recipe => recipe.name.toLowerCase().includes(searchQuery))
+        recipes = searchQuery === "" ? data : data.filter(recipe => recipe.name.toLowerCase().includes(searchQuery.toLowerCase()))
     }
 
     return (
