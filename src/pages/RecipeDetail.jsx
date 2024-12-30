@@ -27,7 +27,7 @@ const RecipeDetail = () => {
                                     <h4 className="card-text">Ingredients:</h4>
                                     <p className="card-text">{data.ingredients.join(", ")}</p>
                                     <h4 className="card-text">Instructions:</h4>
-                                    <ol className="card-text">{data.instructions.map((instruction, index) => (<li>{instruction}</li>))}</ol>
+                                    <ol className="card-text">{data.instructions.map((instruction, index) => (<li key={index}>{instruction}</li>))}</ol>
                                 </div>
                             </div>
                         </div>
