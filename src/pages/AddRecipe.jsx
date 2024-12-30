@@ -35,6 +35,13 @@ const AddRecipe = () => {
             const addedRecipe = response.json()
             if(addedRecipe) {
                 setMessage("Recipe added successfully.")
+                setRecipeData({
+                    name: "",
+                    cuisineType: "",
+                    imageLink: "",
+                    ingredients: [],
+                    instructions: []
+                })
             }
         } catch (error) {
             console.log("Error adding recipe:", error)
@@ -55,18 +62,18 @@ const AddRecipe = () => {
                         <label htmlFor="cuisineType" className="form-label">Cuisine Type:</label>
                         <input type="text" id="cuisineType" name="cuisineType" value={recipeData.cuisineType} onChange={handleChange} className="form-control" required />
                     </div>
-                    <label>
-                        Image Link:<br />
-                        <input type="url" name="imageLink" value={recipeData.imageLink} onChange={handleChange} required />
-                    </label><br /><br />
-                    <label>
-                        Ingredients:<br />
-                        <textarea cols="25" name="ingredients" value={recipeData.ingredients.join(", ")} onChange={handleChange} required></textarea>
-                    </label><br /><br />
-                    <label>
-                        Instructions:<br />
-                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange} required></textarea>
-                    </label><br /><br />
+                    <div className="mb-3">
+                        <label htmlFor="imageLink" className="form-label">Image Link:</label>
+                        <input type="url" id="imageLink" name="imageLink" value={recipeData.imageLink} onChange={handleChange} className="form-control" required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="ingredients" className="form-label">Ingredients:</label>
+                        <textarea id="ingredients" name="ingredients" value={recipeData.ingredients.join(", ")} onChange={handleChange} className="form-control" required></textarea>
+                    </div>
+                    <div className="mb-3">
+                    <label htmlFor="instructions" className="form-label">Instructions:</label>
+                        <textarea id="instructions" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange} className="form-control" required></textarea>
+                    </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 <p>{message}</p>
