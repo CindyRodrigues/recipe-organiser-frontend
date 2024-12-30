@@ -1,6 +1,6 @@
 import Header from "../components/Header"
 import useFetch from "../hooks/useFetch"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RecipeCard from '../components/RecipeCard'
 
 const Recipes = () => {
@@ -8,6 +8,10 @@ const Recipes = () => {
     const [recipes, setRecipes] = useState([])
 
     const { data, loading, error } = useFetch('https://recipe-organiser-backend.vercel.app/recipes')
+
+    useEffect(() => {
+        setRecipes(data)
+    }, [data])
 
 
     if (data && data.length > 0) {
