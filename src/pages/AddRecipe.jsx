@@ -15,7 +15,7 @@ const AddRecipe = () => {
     const handleChange = (event) => {
         const {name, value} = event.target
         setRecipeData((prev) => (
-            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ") : value)}
+            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ").map(instruction => instruction.slice(-1) === "." ? instruction : instruction + ".") : value)}
         ))
     }
 
