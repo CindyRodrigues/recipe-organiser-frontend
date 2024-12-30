@@ -10,7 +10,9 @@ const Recipes = () => {
     const { data, loading, error } = useFetch('https://recipe-organiser-backend.vercel.app/recipes')
 
     useEffect(() => {
-        setRecipes(data)
+        if(data) {
+            setRecipes(data)
+        }
     }, [data])
 
 
