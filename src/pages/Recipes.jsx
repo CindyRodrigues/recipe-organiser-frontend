@@ -10,16 +10,12 @@ const Recipes = () => {
     const { data, loading, error } = useFetch('https://recipe-organiser-backend.vercel.app/recipes')
 
     useEffect(() => {
-        if(data) {
-            setRecipes(data)
+        if (data && data.length > 0) {
+            const filteredRecipes = searchQuery === "" ? data : data.filter(recipe => recipe.name.toLowerCase().includes(searchQuery.toLowerCase()))
+            setRecipes(filteredRecipes)
         }
-    }, [data])
+    }, [data, searchQuery])
 
-
-    if (data && data.length > 0) {
-        const filteredRecipes = searchQuery === "" ? data : data.filter(recipe => recipe.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        setRecipes(filteredRecipes)
-    }
 
     return (
         <div>
