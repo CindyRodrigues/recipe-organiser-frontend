@@ -47,25 +47,25 @@ const AddRecipe = () => {
             <main className="container py-4">
                 <h2>Add Recipe</h2>
                 <form onSubmit={handleAddRecipeForm} className="mb-4">
-                    <label>
-                        Name:<br />
-                        <input type="text" name="name" value={recipeData.name} onChange={handleChange} />
-                    </label><br /><br />
-                    <label>
-                        Cuisine Type:<br />
-                        <input type="text" name="cuisineType" value={recipeData.cuisineType} onChange={handleChange} />
-                    </label><br /><br />
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Name:</label>
+                        <input type="text" id="name" name="name" value={recipeData.name} onChange={handleChange} className="form-control" required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="cuisineType" className="form-label">Cuisine Type:</label>
+                        <input type="text" id="cuisineType" name="cuisineType" value={recipeData.cuisineType} onChange={handleChange} className="form-control" required />
+                    </div>
                     <label>
                         Image Link:<br />
-                        <input type="text" name="imageLink" value={recipeData.imageLink} onChange={handleChange} />
+                        <input type="url" name="imageLink" value={recipeData.imageLink} onChange={handleChange} required />
                     </label><br /><br />
                     <label>
                         Ingredients:<br />
-                        <textarea cols="25" name="ingredients" value={recipeData.ingredients.join(", ")} onChange={handleChange}></textarea>
+                        <textarea cols="25" name="ingredients" value={recipeData.ingredients.join(", ")} onChange={handleChange} required></textarea>
                     </label><br /><br />
                     <label>
                         Instructions:<br />
-                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange}></textarea>
+                        <textarea cols="25" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange} required></textarea>
                     </label><br /><br />
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
