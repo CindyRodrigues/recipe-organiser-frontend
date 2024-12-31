@@ -14,9 +14,16 @@ const AddRecipe = () => {
 
     const handleChange = (event) => {
         const {name, value} = event.target
-        setRecipeData((prev) => (
-            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ") : value)}
-        ))
+        setRecipeData((prev) => {
+            if (name === "ingredients") {
+                return {...prev, ingredients: value.split(", ")}
+            } else if (name === "instructions") {
+                const formattedInstructions = value.split(". ").map((instruction) => instruction.trim().endsWith(".") ? instruction.trim() : instruction.trim() + ".")
+                return {...prev, instructions: formattedInstructions}
+            } else {
+                return {...prev, [name]: value}
+            }
+        })
     }
 
     const handleAddRecipeForm = async (event) => {
