@@ -15,7 +15,7 @@ const AddRecipe = () => {
     const handleChange = (event) => {
         const {name, value} = event.target
         setRecipeData((prev) => (
-            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ").map(instruction => instruction.slice(-1) === "." ? instruction : instruction + ".") : value)}
+            {...prev, [name]: name === "ingredients" ? value.split(", ") : (name === "instructions" ? value.split(". ") : value)}
         ))
     }
 
@@ -69,10 +69,12 @@ const AddRecipe = () => {
                     <div className="mb-3">
                         <label htmlFor="ingredients" className="form-label">Ingredients:</label>
                         <textarea id="ingredients" name="ingredients" value={recipeData.ingredients.join(", ")} onChange={handleChange} className="form-control" required></textarea>
+                        <small className="form-text">Please enter ingredients separated by commas (e.g., sugar, flour, eggs)</small>
                     </div>
                     <div className="mb-3">
                     <label htmlFor="instructions" className="form-label">Instructions:</label>
                         <textarea id="instructions" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange} className="form-control" required></textarea>
+                        <small className="form-text">Please enter instructions separated by full stops (e.g., Mix well. Bake for 30 minutes.)</small>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
