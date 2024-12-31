@@ -14,27 +14,27 @@ const AddRecipe = () => {
 
     const handleChange = (event) => {
         const {name, value} = event.target
-        setRecipeData((prev) => {
-            if (name === "ingredients") {
-                return {...prev, ingredients: value.split(", ")}
-            } else if (name === "instructions") {
-                const formattedInstructions = value.split(". ").map((instruction) => instruction.trim().endsWith(".") ? instruction.trim() : instruction.trim() + ".")
-                return {...prev, instructions: formattedInstructions}
-            } else {
-                return {...prev, [name]: value}
-            }
-        })
+        setRecipeData((prev) => ({...prev, [name]: value}))
     }
 
     const handleAddRecipeForm = async (event) => {
         event.preventDefault()
+        
+        const formattedIngredients = recipeData.ingredients.split(", ")
+        const formattedInstructions = recipeData.instructions.split(". ").map((instruction) => instruction.endsWith(".") ? instruction : instruction + ".")
+        const formattedRecipeData = {
+            ...recipeData,
+            ingredients: formattedIngredients,
+            instructions: formattedInstructions
+        }
+        
         try {
             const response = await fetch("https://recipe-organiser-backend.vercel.app/recipes", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(recipeData)
+                body: JSON.stringify(formattedRecipeData)
             })
             if(!response.ok) {
                 throw "Failed to add recipe."
@@ -75,12 +75,12 @@ const AddRecipe = () => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="ingredients" className="form-label">Ingredients:</label>
-                        <textarea id="ingredients" name="ingredients" value={recipeData.ingredients.join(", ")} onChange={handleChange} className="form-control" required></textarea>
+                        <textarea id="ingredients" name="ingredients" value={recipeData.ingredients} onChange={handleChange} className="form-control" required></textarea>
                         <small className="form-text">Please enter ingredients separated by commas (e.g., sugar, flour, eggs)</small>
                     </div>
                     <div className="mb-3">
                     <label htmlFor="instructions" className="form-label">Instructions:</label>
-                        <textarea id="instructions" name="instructions" value={recipeData.instructions.join(". ")} onChange={handleChange} className="form-control" required></textarea>
+                        <textarea id="instructions" name="instructions" value={recipeData.instructions} onChange={handleChange} className="form-control" required></textarea>
                         <small className="form-text">Please enter instructions separated by full stops (e.g., Mix well. Bake for 30 minutes.)</small>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
